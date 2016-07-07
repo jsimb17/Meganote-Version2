@@ -1,12 +1,9 @@
 (function() {
-  'use strict';
-
-  angular
-    .module('meganote.notes')
+  angular.module('meganote.notes')
     .factory('NotesService', NotesService);
 
-  NotesService.$inject = ['$http', 'DATABASE_URL'];
-  function NotesService($http, DATABASE_URL) {
+  NotesService.$inject = ['$http', 'API_BASE'];
+  function NotesService($http, API_BASE) {
     var service = {
       notes: [],
       getNotes: getNotes,
@@ -19,8 +16,10 @@
 
     return service;
 
+    //////////////////////
+
     function getNotes() {
-      var notesPromise = $http.get(DATABASE_URL);
+      var notesPromise = $http.get(API_BASE);
 
       notesPromise.then(function(res) {
         service.notes = res.data;
@@ -30,7 +29,7 @@
     }
 
     function create(note) {
-      var notesPromise = $http.post(DATABASE_URL, {
+      var notesPromise = $http.post(API_BASE, {
         note: note
       });
 
@@ -42,7 +41,7 @@
     }
 
     function update(note) {
-      var notesPromise = $http.put(DATABASE_URL + note._id, {
+      var notesPromise = $http.put(API_BASE + note._id, {
         note: note
       });
 
@@ -55,7 +54,7 @@
     }
 
     function destroy(note) {
-      var notesPromise = $http.delete(DATABASE_URL + note._id);
+      var notesPromise = $http.delete(API_BASE + note._id);
 
       notesPromise.then(function(res) {
         service.removeById(res.data.note._id);
@@ -80,4 +79,4 @@
       }
     }
   }
-})();
+}());

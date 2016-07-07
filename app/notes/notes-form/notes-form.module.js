@@ -1,5 +1,4 @@
 (function() {
-    'use strict';
-
-
-  })();
+  'use strict';
+  angular.module('meganote.notesForm', []);
+})();

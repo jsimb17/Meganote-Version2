@@ -1,13 +1,12 @@
 (function() {
   'use strict';
-
-  angular
-    .module('meganote.notes')
+  angular.module('meganote.notes')
     .config(notesConfig);
 
   notesConfig.$inject = ['$stateProvider'];
   function notesConfig($stateProvider) {
     $stateProvider
+
       .state('notes', {
         url: '/notes',
         templateUrl: 'notes/notes.html',
@@ -19,8 +18,11 @@
       })
 
       .state('notes.form', {
-        url
-      })
+        url: '/:noteId',
+        templateUrl: 'notes/notes-form/notes-form.html',
+        controller: 'NotesFormController',
+        controllerAs: 'vm',
+      });
   }
 
   notesLoaded.$inject = ['NotesService'];

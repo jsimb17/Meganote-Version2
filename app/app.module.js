@@ -1,20 +1,11 @@
 (function() {
-  'use strict';
-
-  angular
-    .module('meganote', [
-      // Angular modules
-      'ui.router',
-
-      // Third-party modules
-      'ngFlash',
-      'textAngular',
-
-      // Custom modules
-      'meganote.notes',
-      'meganote.notesForm',
-      'meganote.layout'
-    ])
+  angular.module('meganote', [
+    'ui.router',
+    'ngFlash',
+    'textAngular',
+    'meganote.notes',
+    'meganote.notesForm'
+  ])
     .config(config);
 
   config.$inject = ['$urlRouterProvider'];

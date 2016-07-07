@@ -1,24 +1,22 @@
 (function() {
-  'use strict';
-
-  angular
-    .module('meganote.notesForm')
+  angular.module('meganote.notesForm')
     .controller('NotesFormController', NotesFormController);
 
   NotesFormController.$inject = ['$state', 'Flash', 'NotesService'];
   function NotesFormController($state, Flash, NotesService) {
     var vm = this;
-
     vm.note = NotesService.find($state.params.noteId);
     vm.clearForm = clearForm;
-    vm.save = saveNote;
-    vm.delete = deleteNote;
+    vm.save = save;
+    vm.destroy = destroy;
+
+    //////////////
 
     function clearForm() {
       vm.note = { title: '', body_html: '' };
     }
 
-    function saveNote() {
+    function save() {
       if (vm.note._id) {
         NotesService.update(vm.note)
           .then(
@@ -36,6 +34,7 @@
             function(res) {
               vm.note = res.data.note;
               Flash.create('success', res.data.message);
+              $state.go('notes.form', { noteId: res.data.note._id });
             },
             function() {
               Flash.create('danger', 'Oops! Something went wrong.');
@@ -43,11 +42,11 @@
       }
     }
 
-    function deleteNote() {
-      NotesService.deleteNote(vm.note)
+    function destroy() {
+      NotesService.destroy(vm.note)
         .then(function() {
           vm.clearForm();
         });
     }
   }
-})();
+}());

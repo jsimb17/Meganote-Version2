@@ -1,6 +1,4 @@
 (function() {
   'use strict';
-
-  angular
-    .module('meganote.notes', []);
+  angular.module('meganote.notes', []);
 })();
