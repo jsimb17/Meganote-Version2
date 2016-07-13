@@ -1,10 +1,13 @@
-(function() {
+{
   angular.module('meganote', [
     'ui.router',
     'ngFlash',
     'textAngular',
     'meganote.notes',
-    'meganote.notesForm'
+    'meganote.notesForm',
+    'meganote.signUp',
+    'meganote.signIn',
+    'meganote.users'
   ])
     .config(config);
 
@@ -12,4 +15,4 @@
   function config($urlRouterProvider) {
     $urlRouterProvider.otherwise('/notes/');
   }
-})();
+}
