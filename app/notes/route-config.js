@@ -13,7 +13,10 @@
       controllerAs: 'vm',
       resolve: {
         notesLoaded: notesLoaded
-      }
+      },
+      data: {
+        title: 'Notes'
+      },
     })
 
     .state('notes.form', {
@@ -21,6 +24,12 @@
       templateUrl: 'notes/notes-form/notes-form.html',
       controller: 'NotesFormController',
       controllerAs: 'vm',
+      data: {
+        title: 'Notes'
+      },
+      onExit: ['Flash', (Flash) => {
+        Flash.clear();
+      }],
     });
   }
 
